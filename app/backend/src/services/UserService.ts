@@ -23,6 +23,13 @@ export default class UserService {
     const token = jwt.sign(payload, secret as string);
     return token;
   }
+
+  async getRole(token:string) {
+    const decoded = jwt.verify(token, secret as string) as jwt.JwtPayload;
+    const { username, role } = decoded;
+    await this.model.findOne({ where: { username } });
+    return role;
+  }
 }
 
 export const { login } = new UserService();
