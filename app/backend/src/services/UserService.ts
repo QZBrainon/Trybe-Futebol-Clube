@@ -8,10 +8,10 @@ dotenv.config();
 const secret = process.env.JWT_SECRET;
 
 export default class UserService {
-  constructor(private model = Users) {}
+  constructor(private _model = Users) {}
 
   async login(email:string, password:string) {
-    const user = await this.model.findOne({
+    const user = await this._model.findOne({
       where: { email },
     });
     if (!user) { return null; }
@@ -27,9 +27,11 @@ export default class UserService {
   async getRole(token:string) {
     const decoded = jwt.verify(token, secret as string) as jwt.JwtPayload;
     const { username, role } = decoded;
-    await this.model.findOne({ where: { username } });
+    await this._model.findOne({ where: { username } });
     return role;
   }
+
+  get model():Users { return this.model; }
 }
 
 export const { login } = new UserService();
