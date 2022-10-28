@@ -55,7 +55,5 @@ describe('Testa a rota POST /login', () => {
     
     expect(httpResponse.status).to.equal(200)
     expect(httpResponse.body).to.haveOwnProperty('token')
-
   })
-
 })
