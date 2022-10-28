@@ -16,7 +16,7 @@ Teams.init({
     allowNull: false,
     autoIncrement: true,
   },
-  teamsName: {
+  teamName: {
     type: STRING,
     allowNull: false,
   },
