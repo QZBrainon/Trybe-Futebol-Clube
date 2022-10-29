@@ -1,4 +1,4 @@
-// import Teams from '../database/models/TeamModel';
+import Teams from '../database/models/TeamModel';
 import Matches from '../database/models/MatchModel';
 
 export default class MatchesService {
@@ -8,8 +8,11 @@ export default class MatchesService {
     const inProgressMatches = await this._model.findAll({
       where: {
         inProgress: isInProgress,
-        include: 'teamHome',
       },
+      include: [
+        { model: Teams, as: 'teamHome', attributes: { exclude: ['id'] } },
+        { model: Teams, as: 'teamAway', attributes: { exclude: ['id'] } },
+      ],
     });
     return inProgressMatches;
   }
