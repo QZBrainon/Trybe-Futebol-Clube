@@ -1,9 +1,8 @@
 import { Router } from 'express';
-import { getAllMatches, getInProgressMatches } from '../controllers/MatchesController';
+import getAllOrInProgressMatches from '../controllers/MatchesController';
 
 const router = Router();
 
-router.get('/', getAllMatches);
-router.get('/inProgress', getInProgressMatches);
+router.get('/', getAllOrInProgressMatches);
 
 export default router;
