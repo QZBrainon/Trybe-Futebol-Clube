@@ -3,7 +3,7 @@ import { getAllMatches, getInProgressMatches } from '../controllers/MatchesContr
 
 const router = Router();
 
-router.get('/', getInProgressMatches);
 router.get('/', getAllMatches);
+router.get('/inProgress', getInProgressMatches);
 
 export default router;
