@@ -3,6 +3,11 @@ import MatchesService from '../services/MatchesService';
 
 const matchesService = new MatchesService();
 
+const getAllMatches = async (_req:Request, res:Response) => {
+  const result = await matchesService.getAllMatches();
+  return res.status(200).json(result);
+};
+
 const getInProgressMatches = async (req: Request, res: Response) => {
   const { inProgress } = req.query;
   const strToBool = inProgress === 'true';
@@ -10,4 +15,4 @@ const getInProgressMatches = async (req: Request, res: Response) => {
   return res.status(200).json(result);
 };
 
-export default getInProgressMatches;
+export { getInProgressMatches, getAllMatches };
