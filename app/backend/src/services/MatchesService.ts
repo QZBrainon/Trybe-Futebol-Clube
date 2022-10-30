@@ -1,3 +1,4 @@
+import IUpdateGoals from '../interfaces/IUpdateGoals';
 import Teams from '../database/models/TeamModel';
 import Matches from '../database/models/MatchModel';
 
@@ -45,6 +46,14 @@ export default class MatchesService {
 
   async endMatch(id:number) {
     const result = await this._model.update({ inProgress: false }, { where: { id } });
+    return result;
+  }
+
+  async updateGoals(id:number, { homeTeamGoals, awayTeamGoals }:IUpdateGoals) {
+    const result = await this._model.update({
+      homeTeamGoals,
+      awayTeamGoals,
+    }, { where: { id } });
     return result;
   }
 }

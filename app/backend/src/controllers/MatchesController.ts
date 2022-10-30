@@ -42,4 +42,15 @@ const endMatch = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllOrInProgressMatches, postMatches, endMatch };
+const updateGoals = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    await matchesService.updateGoals(Number(id), body);
+    return res.status(200).json({ message: 'score updated' });
+  } catch (e) {
+    return res.status(500).send({ message: 'Could not update scores' });
+  }
+};
+
+export { getAllOrInProgressMatches, postMatches, endMatch, updateGoals };
