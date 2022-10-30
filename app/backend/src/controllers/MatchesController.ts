@@ -23,6 +23,9 @@ const postMatches = async (req: Request, res: Response) => {
       });
     }
     const result = await matchesService.postMatches(match);
+    if (result === 'There is no team with such id!') {
+      res.status(404).json({ message: result });
+    }
     return res.status(201).json(result);
   } catch (e) {
     return res.status(500).send({ message: 'invalid body format' });

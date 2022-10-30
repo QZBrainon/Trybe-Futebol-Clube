@@ -28,14 +28,19 @@ export default class MatchesService {
   }
 
   async postMatches({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: Matches) {
-    const result = await this._model.create({
-      homeTeam,
-      awayTeam,
-      homeTeamGoals,
-      awayTeamGoals,
-      inProgress: true,
-    });
-    return result;
+    const checkHomeTeam = await this._model.findOne({ where: { homeTeam } });
+    const checkAwayTeam = await this._model.findOne({ where: { awayTeam } });
+    if (checkHomeTeam && checkAwayTeam) {
+      const result = await this._model.create({
+        homeTeam,
+        awayTeam,
+        homeTeamGoals,
+        awayTeamGoals,
+        inProgress: true,
+      });
+      return result;
+    }
+    return 'There is no team with such id!';
   }
 
   async endMatch(id:number) {
