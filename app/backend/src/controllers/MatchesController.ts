@@ -16,8 +16,8 @@ const getAllOrInProgressMatches = async (req: Request, res: Response) => {
 
 const postMatches = async (req: Request, res: Response) => {
   try {
-    const { body } = req.body;
-    const result = await matchesService.postMatches(body);
+    const match = req.body;
+    const result = await matchesService.postMatches(match);
     return res.status(201).json(result);
   } catch (e) {
     return res.status(500).send({ message: 'invalid body format' });

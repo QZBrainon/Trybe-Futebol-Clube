@@ -33,6 +33,7 @@ export default class MatchesService {
       awayTeam,
       homeTeamGoals,
       awayTeamGoals,
+      inProgress: true,
     });
     return result;
   }
