@@ -17,6 +17,11 @@ const getAllOrInProgressMatches = async (req: Request, res: Response) => {
 const postMatches = async (req: Request, res: Response) => {
   try {
     const match = req.body;
+    if (match.homeTeam === match.awayTeam) {
+      return res.status(422).json({
+        message: 'It is not possible to create a match with two equal teams',
+      });
+    }
     const result = await matchesService.postMatches(match);
     return res.status(201).json(result);
   } catch (e) {
