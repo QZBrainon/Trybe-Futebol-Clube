@@ -24,4 +24,14 @@ const postMatches = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllOrInProgressMatches, postMatches };
+const endMatch = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    await matchesService.endMatch(Number(id));
+    return res.status(200).json({ message: 'Finished' });
+  } catch (e) {
+    res.status(500).send();
+  }
+};
+
+export { getAllOrInProgressMatches, postMatches, endMatch };

@@ -37,4 +37,9 @@ export default class MatchesService {
     });
     return result;
   }
+
+  async endMatch(id:number) {
+    const result = await this._model.update({ inProgress: false }, { where: { id } });
+    return result;
+  }
 }
