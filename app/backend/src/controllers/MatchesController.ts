@@ -14,4 +14,14 @@ const getAllOrInProgressMatches = async (req: Request, res: Response) => {
   return res.status(200).json(result);
 };
 
-export default getAllOrInProgressMatches;
+const postMatches = async (req: Request, res: Response) => {
+  try {
+    const { body } = req.body;
+    const result = await matchesService.postMatches(body);
+    return res.status(201).json(result);
+  } catch (e) {
+    return res.status(500).send({ message: 'invalid body format' });
+  }
+};
+
+export { getAllOrInProgressMatches, postMatches };

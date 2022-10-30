@@ -26,4 +26,14 @@ export default class MatchesService {
     });
     return inProgressMatches;
   }
+
+  async postMatches({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: Matches) {
+    const result = await this._model.create({
+      homeTeam,
+      awayTeam,
+      homeTeamGoals,
+      awayTeamGoals,
+    });
+    return result;
+  }
 }
