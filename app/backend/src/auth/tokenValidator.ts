@@ -14,7 +14,7 @@ const jwtAuth = async (req:Request, res:Response, next:NextFunction) => {
     jwt.verify(token, secret as string);
     return next();
   } catch (e) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    return res.status(401).json({ message: 'Token must be a valid token' });
   }
 };
 
