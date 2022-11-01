@@ -61,5 +61,20 @@ const getHomeLeaderboard = async (req: Request, res: Response) => {
     return res.status(500).end();
   }
 };
+const getAwayLeaderboard = async (req: Request, res: Response) => {
+  try {
+    const result = await matchesService.getAwayLeaderboard();
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).end();
+  }
+};
 
-export { getAllOrInProgressMatches, postMatches, endMatch, updateGoals, getHomeLeaderboard };
+export {
+  getAllOrInProgressMatches,
+  postMatches,
+  endMatch,
+  updateGoals,
+  getHomeLeaderboard,
+  getAwayLeaderboard,
+};

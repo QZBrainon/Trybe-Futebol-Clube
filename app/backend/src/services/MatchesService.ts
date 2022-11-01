@@ -2,7 +2,8 @@ import sequelize = require('sequelize');
 import IUpdateGoals from '../interfaces/IUpdateGoals';
 import Teams from '../database/models/TeamModel';
 import Matches from '../database/models/MatchModel';
-import query from '../utils/homeLeaderBoardQuery';
+import * as homeLeaderboardQuery from '../utils/homeLeaderboardQuery';
+import * as awayLeaderboardQuery from '../utils/awayLeaderboardQuery';
 
 export default class MatchesService {
   constructor(private _model = Matches) {}
@@ -60,10 +61,16 @@ export default class MatchesService {
   }
 
   async getHomeLeaderboard() {
-    const result = await this._model.sequelize?.query(query, {
+    const result = await this._model.sequelize?.query(homeLeaderboardQuery.default, {
       type: sequelize.QueryTypes.SELECT,
     });
-    console.log(result);
+    return result;
+  }
+
+  async getAwayLeaderboard() {
+    const result = await this._model.sequelize?.query(awayLeaderboardQuery.default, {
+      type: sequelize.QueryTypes.SELECT,
+    });
 
     return result;
   }
