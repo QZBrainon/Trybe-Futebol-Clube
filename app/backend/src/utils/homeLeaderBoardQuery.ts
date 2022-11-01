@@ -13,6 +13,6 @@ sum(if(home_team_goals=away_team_goals, 1, 0)))/(count(home_team)*3)*100,2) as e
 from matches 
 join teams on matches.home_team = teams.id
 where in_progress=0 group by home_team
-ORDER BY totalVictories desc, goalsBalance desc, goalsFavor desc, goalsOwn`;
+ORDER BY totalPoints desc, totalVictories desc, goalsBalance desc, goalsFavor desc, goalsOwn`;
 
 export default query;
