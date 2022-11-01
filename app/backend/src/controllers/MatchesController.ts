@@ -53,4 +53,13 @@ const updateGoals = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllOrInProgressMatches, postMatches, endMatch, updateGoals };
+const getHomeLeaderboard = async (req: Request, res: Response) => {
+  try {
+    const result = await matchesService.getHomeLeaderboard();
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).end();
+  }
+};
+
+export { getAllOrInProgressMatches, postMatches, endMatch, updateGoals, getHomeLeaderboard };

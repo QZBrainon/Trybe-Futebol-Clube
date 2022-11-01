@@ -1,6 +1,8 @@
+import sequelize = require('sequelize');
 import IUpdateGoals from '../interfaces/IUpdateGoals';
 import Teams from '../database/models/TeamModel';
 import Matches from '../database/models/MatchModel';
+import query from '../utils/homeLeaderBoardQuery';
 
 export default class MatchesService {
   constructor(private _model = Matches) {}
@@ -54,6 +56,15 @@ export default class MatchesService {
       homeTeamGoals,
       awayTeamGoals,
     }, { where: { id } });
+    return result;
+  }
+
+  async getHomeLeaderboard() {
+    const result = await this._model.sequelize?.query(query, {
+      type: sequelize.QueryTypes.SELECT,
+    });
+    console.log(result);
+
     return result;
   }
 }
